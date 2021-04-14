@@ -1,4 +1,5 @@
-FROM mgor/docker-ubuntu-pkg-builder:RELEASE
+ARG RELEASE
+FROM mgor/docker-ubuntu-pkg-builder:$RELEASE
 
 LABEL org.opencontainers.image.authors="Mikael Göransson <github@mgor.se>"
 

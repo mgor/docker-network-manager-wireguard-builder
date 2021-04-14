@@ -14,9 +14,7 @@ all: build clean run
 
 build:
 	docker pull mgor/docker-ubuntu-pkg-builder:$(RELEASE)
-	sed -r 's|RELEASE|$(RELEASE)|' Dockerfile.template > Dockerfile
-	DOCKER_BUILDKIT=1 docker build -t $(NAME) .
-	rm Dockerfile
+	docker image build --build-arg RELEASE=$(RELEASE) -t $(NAME) .
 
 run:
 	docker run --rm --name $(HOSTNAME) --hostname $(HOSTNAME) -v $(CURDIR)/packages:/usr/local/src --env USER_ID=$(USER_ID) --env GROUP_ID=$(GROUP_ID) -it $(NAME)
